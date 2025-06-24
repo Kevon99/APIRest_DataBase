@@ -2,15 +2,36 @@ import { getDataBase } from "../config.js";
 
 
 const largeDocuments = async () => {
-    const db = await getDataBase()
-    const getlarge = await db.collection('usuarios').countDocuments()
-    return getlarge
+    try{
+        const db = await getDataBase()
+        const getlarge = await db.collection('usuarios').countDocuments()
+        return getlarge
+    }catch(error){
+        console.error(`Error making a count of documents of users `, error)
+    }
 }
 
  const newUser = async (user) => {
-    const db = await getDataBase()
-    const makeUser = await db.collection('usuarios').insertOne(user)
-    return makeUser
+    try{
+        const db = await getDataBase()
+        const makeUser = await db.collection('usuarios').insertOne(user)
+        return makeUser.insertedId
+    }catch(error){
+        console.error(`Error making a new user ${JSON.stringify(user)}:`, error)
+        return null
+    }
  }
 
-export {newUser, largeDocuments}
+const findUser = async (user) => {
+    try{
+        const db = await getDataBase()
+        const found = await db.collection('usuarios').findOne(user)
+        return found
+    }catch(error){
+        console.error(`Error looking for user with filter ${JSON.stringify(user)}:`, error)
+        return null
+    }
+}
+
+
+export {newUser, largeDocuments, findUser}

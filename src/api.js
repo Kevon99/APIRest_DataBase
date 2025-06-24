@@ -14,7 +14,6 @@ app.use('/api/users', routerUser)
 
 
 
-
 app.listen(PORT, () => {
     console.log(`Server Listening on Port ${PORT}`)
 })

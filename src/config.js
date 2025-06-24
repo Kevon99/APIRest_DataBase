@@ -13,4 +13,5 @@ const getDataBase = async () => {
     }
 }
 
+
 export {getDataBase}
