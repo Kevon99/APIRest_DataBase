@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 
-// params of database localhost
+// params of database localhost of your machine
 
 const mongoUrl = "mongodb://localhost:27017/prueba"
 
