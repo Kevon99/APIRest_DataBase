@@ -11,11 +11,12 @@ const largeDocuments = async () => {
     }
 }
 
- const newUser = async (user) => {
+ const createUser = async (user) => {
     try{
         const db = await getDataBase()
-        const makeUser = await db.collection('usuarios').insertOne(user)
-        return makeUser.insertedId
+        const result = await db.collection('usuarios').insertOne(user)
+        if(!result.insertedId) return null
+        return await db.collection('usuarios').findOne({_id: result.insertedId})
     }catch(error){
         console.error(`Error making a new user ${JSON.stringify(user)}:`, error)
         return null
@@ -34,4 +35,7 @@ const findUser = async (user) => {
 }
 
 
-export {newUser, largeDocuments, findUser}
+
+
+
+export {createUser, largeDocuments, findUser, }

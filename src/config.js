@@ -1,8 +1,12 @@
 import { MongoClient } from "mongodb";
+import dotenv from "dotenv";
 
-// params of database localhost of your machine
 
-const mongoUrl = "mongodb://localhost:27017/prueba"
+dotenv.config();
+
+
+
+const mongoUrl = process.env.DATABASE_URL || "mongodb://localhost:27017/prueba";
 
 const getDataBase = async () => {
     try{
@@ -12,6 +16,7 @@ const getDataBase = async () => {
         console.error(error)
     }
 }
+
 
 
 export {getDataBase}
